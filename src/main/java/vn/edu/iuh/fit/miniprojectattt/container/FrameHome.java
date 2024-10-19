@@ -5,7 +5,6 @@
 package vn.edu.iuh.fit.miniprojectattt.container;
 
 /**
- *
  * @author Dell
  */
 public class FrameHome extends javax.swing.JFrame {
@@ -27,23 +26,28 @@ public class FrameHome extends javax.swing.JFrame {
     private void initComponents() {
 
         lableHeaderText = new javax.swing.JLabel();
-        lableKey = new javax.swing.JLabel();
         btnGiaiMa = new javax.swing.JButton();
+        btnGiaiMa1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lableHeaderText.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lableHeaderText.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lableHeaderText.setText("Thuật toán ASE");
-
-        lableKey.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lableKey.setText("Nhập khóa:");
+        lableHeaderText.setText("Mã hóa và giải mã thông tin");
 
         btnGiaiMa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGiaiMa.setText("RSA");
         btnGiaiMa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGiaiMaActionPerformed(evt);
+            }
+        });
+
+        btnGiaiMa1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnGiaiMa1.setText("ASE");
+        btnGiaiMa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiaiMa1ActionPerformed(evt);
             }
         });
 
@@ -54,86 +58,56 @@ public class FrameHome extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
-                        .addComponent(lableHeaderText, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(218, 218, 218)
+                        .addComponent(lableHeaderText, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lableKey, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(263, Short.MAX_VALUE))
+                        .addGap(170, 170, 170)
+                        .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(124, 124, 124)
+                        .addComponent(btnGiaiMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lableHeaderText, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118)
+                .addGap(110, 110, 110)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lableKey, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(236, Short.MAX_VALUE))
+                    .addComponent(btnGiaiMa, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGiaiMa1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGiaiMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMaActionPerformed
-       callFrameRSA();
+        callFrameRSA();
     }//GEN-LAST:event_btnGiaiMaActionPerformed
 
-     private void callFrameRSA() {
+    private void btnGiaiMa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMa1ActionPerformed
+        callFrameASE();
+    }//GEN-LAST:event_btnGiaiMa1ActionPerformed
+
+    private void callFrameRSA() {
         FrameRSA frThemKH = new FrameRSA();
         frThemKH.setDefaultCloseOperation(HIDE_ON_CLOSE);
         frThemKH.setResizable(false);
         frThemKH.setVisible(true);
     }
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrameHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrameHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrameHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrameHome.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FrameHome().setVisible(true);
-            }
-        });
+    private void callFrameASE() {
+        FrameASE frThemKH = new FrameASE();
+        frThemKH.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        frThemKH.setResizable(false);
+        frThemKH.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGiaiMa;
+    private javax.swing.JButton btnGiaiMa1;
     private javax.swing.JLabel lableHeaderText;
-    private javax.swing.JLabel lableKey;
     // End of variables declaration//GEN-END:variables
 }
