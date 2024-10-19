@@ -3,6 +3,10 @@
  */
 
 package vn.edu.iuh.fit.miniprojectattt;
+import javax.swing.*;
+
+import vn.edu.iuh.fit.miniprojectattt.container.FrameHome;
+import vn.edu.iuh.fit.miniprojectattt.container.FrameHome;
 
 /**
  * @author Dell
@@ -10,6 +14,9 @@ package vn.edu.iuh.fit.miniprojectattt;
 public class MiniProjectATTT {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        FrameHome jFrameHome = new FrameHome();
+        jFrameHome.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrameHome.setResizable(false);
+        jFrameHome.setVisible(true);
     }
 }
