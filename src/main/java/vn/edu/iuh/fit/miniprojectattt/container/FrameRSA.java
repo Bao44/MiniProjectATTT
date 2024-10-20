@@ -4,16 +4,23 @@
  */
 package vn.edu.iuh.fit.miniprojectattt.container;
 
+import vn.edu.iuh.fit.miniprojectattt.conponents.RSA;
+
+import java.math.BigInteger;
+import javax.swing.*;
+
 /**
- *
  * @author Dell
  */
 public class FrameRSA extends javax.swing.JFrame {
+
+    private RSA rsa = new RSA(1024);
 
     /**
      * Creates new form JFrameASE
      */
     public FrameRSA() {
+
         initComponents();
     }
 
@@ -38,7 +45,8 @@ public class FrameRSA extends javax.swing.JFrame {
         textKey = new javax.swing.JTextField();
         panelResult = new javax.swing.JPanel();
         lableResult = new javax.swing.JLabel();
-        textResult = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        areaResult = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,9 +57,19 @@ public class FrameRSA extends javax.swing.JFrame {
 
         btnMaHoa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnMaHoa.setText("Mã hóa");
+        btnMaHoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMaHoaActionPerformed(evt);
+            }
+        });
 
         btnGiaiMa.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnGiaiMa.setText("Giải mã");
+        btnGiaiMa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGiaiMaActionPerformed(evt);
+            }
+        });
 
         panelString.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -61,6 +79,8 @@ public class FrameRSA extends javax.swing.JFrame {
         areaInput.setColumns(20);
         areaInput.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         areaInput.setRows(5);
+        areaInput.setLineWrap(true); // Bật tính năng tự động xuống dòng
+        areaInput.setWrapStyleWord(true); // Xuống dòng ở ranh giới từ
         scrollPanelString.setViewportView(areaInput);
 
         javax.swing.GroupLayout panelStringLayout = new javax.swing.GroupLayout(panelString);
@@ -93,6 +113,7 @@ public class FrameRSA extends javax.swing.JFrame {
         lableKey.setText("Khóa");
 
         textKey.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        textKey.setEnabled(false);
 
         javax.swing.GroupLayout panelKeyLayout = new javax.swing.GroupLayout(panelKey);
         panelKey.setLayout(panelKeyLayout);
@@ -120,8 +141,11 @@ public class FrameRSA extends javax.swing.JFrame {
         lableResult.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lableResult.setText("Kết quả:");
 
-        textResult.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        textResult.setEnabled(false);
+        areaResult.setColumns(20);
+        areaResult.setRows(5);
+        areaResult.setLineWrap(true); // Bật tính năng tự động xuống dòng
+        areaResult.setWrapStyleWord(true); // Xuống dòng ở ranh giới từ
+        jScrollPane1.setViewportView(areaResult);
 
         javax.swing.GroupLayout panelResultLayout = new javax.swing.GroupLayout(panelResult);
         panelResult.setLayout(panelResultLayout);
@@ -130,18 +154,20 @@ public class FrameRSA extends javax.swing.JFrame {
             .addGroup(panelResultLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lableResult, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(textResult)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         panelResultLayout.setVerticalGroup(
             panelResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelResultLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lableResult, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelResultLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(panelResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lableResult, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textResult, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -194,10 +220,26 @@ public class FrameRSA extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMaHoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMaHoaActionPerformed
+        String input = areaInput.getText();
+        BigInteger messageAsNumber = new BigInteger(input.getBytes());
+        BigInteger encrypted = rsa.encrypt(messageAsNumber);
+        areaResult.setText(encrypted.toString());
+    }//GEN-LAST:event_btnMaHoaActionPerformed
+
+    private void btnGiaiMaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGiaiMaActionPerformed
+        String input = areaInput.getText();
+        BigInteger encrypted = new BigInteger(input);
+        BigInteger decrypted = rsa.decrypt(encrypted);
+        areaResult.setText(new String(decrypted.toByteArray()));
+    }//GEN-LAST:event_btnGiaiMaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaInput;
+    private javax.swing.JTextArea areaResult;
     private javax.swing.JButton btnGiaiMa;
     private javax.swing.JButton btnMaHoa;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableHeaderText;
     private javax.swing.JLabel lableKey;
     private javax.swing.JLabel lableResult;
@@ -207,6 +249,5 @@ public class FrameRSA extends javax.swing.JFrame {
     private javax.swing.JPanel panelString;
     private javax.swing.JScrollPane scrollPanelString;
     private javax.swing.JTextField textKey;
-    private javax.swing.JTextField textResult;
     // End of variables declaration//GEN-END:variables
 }

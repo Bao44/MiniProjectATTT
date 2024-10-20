@@ -38,7 +38,8 @@ public class FrameASE extends javax.swing.JFrame {
         textKey = new javax.swing.JTextField();
         panelResult = new javax.swing.JPanel();
         lableResult = new javax.swing.JLabel();
-        textResult = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        areResult = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +94,7 @@ public class FrameASE extends javax.swing.JFrame {
         lableKey.setText("Khóa");
 
         textKey.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        textKey.setEnabled(false);
 
         javax.swing.GroupLayout panelKeyLayout = new javax.swing.GroupLayout(panelKey);
         panelKey.setLayout(panelKeyLayout);
@@ -120,8 +122,9 @@ public class FrameASE extends javax.swing.JFrame {
         lableResult.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         lableResult.setText("Kết quả:");
 
-        textResult.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        textResult.setEnabled(false);
+        areResult.setColumns(20);
+        areResult.setRows(5);
+        jScrollPane1.setViewportView(areResult);
 
         javax.swing.GroupLayout panelResultLayout = new javax.swing.GroupLayout(panelResult);
         panelResult.setLayout(panelResultLayout);
@@ -130,18 +133,20 @@ public class FrameASE extends javax.swing.JFrame {
             .addGroup(panelResultLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lableResult, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(textResult)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         panelResultLayout.setVerticalGroup(
             panelResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelResultLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
-                .addGroup(panelResultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lableResult, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textResult, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addComponent(lableResult, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+            .addGroup(panelResultLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -195,9 +200,11 @@ public class FrameASE extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea areResult;
     private javax.swing.JTextArea areaInput;
     private javax.swing.JButton btnGiaiMa;
     private javax.swing.JButton btnMaHoa;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lableHeaderText;
     private javax.swing.JLabel lableKey;
     private javax.swing.JLabel lableResult;
@@ -207,6 +214,5 @@ public class FrameASE extends javax.swing.JFrame {
     private javax.swing.JPanel panelString;
     private javax.swing.JScrollPane scrollPanelString;
     private javax.swing.JTextField textKey;
-    private javax.swing.JTextField textResult;
     // End of variables declaration//GEN-END:variables
 }
