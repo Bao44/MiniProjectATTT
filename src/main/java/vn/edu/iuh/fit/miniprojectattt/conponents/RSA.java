@@ -30,12 +30,12 @@ public class RSA {
 
     // Encryption
     public BigInteger encrypt(BigInteger message) {
-        return message.modPow(e, n);
+        return message.modPow(e, n); // c = m^e mod n
     }
 
     // Decryption
     public BigInteger decrypt(BigInteger encrypted) {
-        return encrypted.modPow(d, n);
+        return encrypted.modPow(d, n); // m = c^d mod n
     }
 
     public BigInteger getN() {
@@ -48,7 +48,7 @@ public class RSA {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        RSA rsa = new RSA(1024);
+        RSA rsa = new RSA(1024); // 1024 bit
 
         System.out.println("Enter a message to encrypt:");
         String message = scanner.nextLine();
