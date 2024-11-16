@@ -6,7 +6,6 @@ package vn.edu.iuh.fit.miniprojectattt;
 import javax.swing.*;
 
 import vn.edu.iuh.fit.miniprojectattt.container.FrameHome;
-import vn.edu.iuh.fit.miniprojectattt.container.FrameHome;
 
 /**
  * @author Dell

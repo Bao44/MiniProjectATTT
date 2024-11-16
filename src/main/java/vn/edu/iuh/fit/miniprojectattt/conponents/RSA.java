@@ -8,32 +8,33 @@ import java.util.Scanner;
 public class RSA {
     private BigInteger n, d, e;
 
-    // Key generation
+    // random key
     public RSA(int bitlen) {
         Random random = new Random();
         BigInteger p = BigInteger.probablePrime(bitlen / 2, random);
         BigInteger q = BigInteger.probablePrime(bitlen / 2, random);
         n = p.multiply(q); // 1024 bit
 
+        // phi = (p - 1) * (q - 1)
         BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
 
 
-        // Choose e such that 1 < e < phi and gcd(e, phi) = 1 (public exponent)
+        // Chọn e sao cho gcd(e, phi) = 1 (1 < e < phi)
         e = BigInteger.probablePrime(bitlen / 2, random);
         while (phi.gcd(e).compareTo(BigInteger.ONE) > 0 && e.compareTo(phi) < 0) {
             e = e.add(BigInteger.ONE);
         }
 
-        // Compute d such that e * d ≡ 1 (mod phi)
+        // Tính d sao cho e * d ≡ 1 (mod phi)
         d = e.modInverse(phi);
     }
 
-    // Encryption
+    // Mã hóa
     public BigInteger encrypt(BigInteger message) {
         return message.modPow(e, n); // c = m^e mod n
     }
 
-    // Decryption
+    // Giải mã
     public BigInteger decrypt(BigInteger encrypted) {
         return encrypted.modPow(d, n); // m = c^d mod n
     }
@@ -50,20 +51,22 @@ public class RSA {
         Scanner scanner = new Scanner(System.in);
         RSA rsa = new RSA(1024); // 1024 bit
 
-        System.out.println("Enter a message to encrypt:");
+        System.out.println("Nhập thông tin cần mã hóa:");
         String message = scanner.nextLine();
 
-        // Convert the message to a number
+        // mã hóa message thành số
         BigInteger messageAsNumber = new BigInteger(message.getBytes());
+        System.out.println("Chuyển đổi thông tin thành số: " + messageAsNumber);
 
-        // Encrypt the message
+        // Mã hóa message
         BigInteger encrypted = rsa.encrypt(messageAsNumber);
-        System.out.println("Encrypted message: " + encrypted);
+        System.out.println("Sau khi mã hóa: " + encrypted);
 
-        // Decrypt the message
+        // Giải mã message
         BigInteger decrypted = rsa.decrypt(encrypted);
+        // Chuyển đổi thông tin thành message
         String decryptedMessage = new String(decrypted.toByteArray());
-        System.out.println("Decrypted message: " + decryptedMessage);
+        System.out.println("Sau khi giải mã: " + decryptedMessage);
 
         System.out.println("N: " + rsa.getN());
         System.out.println("E: " + rsa.getE());

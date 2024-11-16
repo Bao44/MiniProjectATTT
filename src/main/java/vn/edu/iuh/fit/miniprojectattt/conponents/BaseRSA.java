@@ -3,16 +3,20 @@ package vn.edu.iuh.fit.miniprojectattt.conponents;
 import java.util.Random;
 import java.util.Scanner;
 
-public class SimpleRSA {
+public class BaseRSA {
     private long n, d, e;
 
-    // Key generation
-    public SimpleRSA() {
+    // tạo khóa
+    public BaseRSA() {
         Random random = new Random();
 
         // Chọn các số nguyên tố nhỏ
         long p = getSmallPrime();
         long q = getSmallPrime();
+
+//        long p = 7;
+//        long q = 11;
+//        e = 17;
 
         n = p * q;  // n = p * q
 
@@ -25,17 +29,17 @@ public class SimpleRSA {
         }
 
         // Tính d sao cho e * d ≡ 1 (mod phi)
-        d = modInverse(e, phi);
+        d = mod(e, phi);
     }
 
     // Hàm mã hóa
-    public long encrypt(long message) {
+    public long maHoa(long message) {
         return modPow(message, e, n);  // message^e % n
     }
 
     // Hàm giải mã
-    public long decrypt(long encrypted) {
-        return modPow(encrypted, d, n);  // encrypted^d % n
+    public long giaiMa(long encrypted) {
+        return modPow(encrypted, d, n);  // maHoa^d % n
     }
 
     public long getN() {
@@ -47,20 +51,20 @@ public class SimpleRSA {
     }
 
     // Hàm tính lũy thừa mod (a^b % mod)
-    private long modPow(long base, long exp, long mod) {
+    private long modPow(long a, long b, long n) {
         long result = 1;
-        base = base % mod;
-        while (exp > 0) {
-            if ((exp % 2) == 1) {  // Nếu lẻ
-                result = (result * base) % mod;
+        a = a % n;
+        while (b > 0) {
+            if ((b % 2) == 1) {  // Nếu lẻ
+                result = (result * a) % n;
             }
-            exp = exp >> 1;  // Chia exp cho 2
-            base = (base * base) % mod;
+            b = b >> 1;  // b = b / 2
+            a = (a * a) % n;
         }
         return result;
     }
 
-    // Hàm tính gcd
+    // Hàm tính ước chung lớn nhất
     private long gcd(long a, long b) {
         while (b != 0) {
             long temp = b;
@@ -70,28 +74,29 @@ public class SimpleRSA {
         return a;
     }
 
-    // Hàm tính nghịch đảo modular của e mod phi
-    private long modInverse(long e, long phi) {
+    // Hàm tính nghịch đảo của e mod phi
+    private long mod(long e, long phi) {
         long m0 = phi, t, q;
-        long x0 = 0, x1 = 1;
+        long t1 = 0, t2 = 1;
 
         if (phi == 1) return 0;
 
-        // Áp dụng Extended Euclidean Algorithm
+        // Áp dụng thuật toán Euclid mở rộng
+        // Bài tập trên lớp
         while (e > 1) {
             q = e / phi;
             t = phi;
             phi = e % phi;
             e = t;
-            t = x0;
-            x0 = x1 - q * x0;
-            x1 = t;
+            t = t1;
+            t1 = t2 - q * t1;
+            t2 = t;
         }
 
-        if (x1 < 0)
-            x1 += m0;
+        if (t2 < 0)
+            t2 += m0;
 
-        return x1;
+        return t2;
     }
 
     // Hàm lấy số nguyên tố nhỏ
@@ -103,22 +108,21 @@ public class SimpleRSA {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        SimpleRSA rsa = new SimpleRSA();
+        BaseRSA rsa = new BaseRSA();
 
-        System.out.println("Enter a message (number) to encrypt:");
+        System.out.println("Nhập số cần mã hóa: ");
         long message = scanner.nextLong();
 
         // Mã hóa message
-        long encrypted = rsa.encrypt(message);
-        System.out.println("Encrypted message: " + encrypted);
+        long maHoa = rsa.maHoa(message);
+        System.out.println("Số sau khi mã hóa: " + maHoa);
 
         // Giải mã message
-        long decrypted = rsa.decrypt(encrypted);
-        System.out.println("Decrypted message: " + decrypted);
+        long giaiMa = rsa.giaiMa(maHoa);
+        System.out.println("Số sau khi giải mã: " + giaiMa);
 
-        System.out.println("N: " + rsa.getN());
-        System.out.println("E: " + rsa.getE());
-        System.out.println("D: " + rsa.d);
+        System.out.println("Khóa công khai: {E, N} = {" + rsa.getE() + ", " + rsa.getN() + "}");
+        System.out.println("Khóa riêng: {D, N} = {" + rsa.d + ", " + rsa.n + "}");
         scanner.close();
     }
 }
