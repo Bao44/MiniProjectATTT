@@ -138,7 +138,7 @@ public class FrameRSA extends javax.swing.JFrame {
 
         panelResult.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lableResult.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        lableResult.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lableResult.setText("Kết quả:");
 
         areaResult.setColumns(20);
