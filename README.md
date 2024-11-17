@@ -1,1 +1,1 @@
-### Mã hóa và giải mã 1 chuỗi bằng RSA, ASE
+### Mã hóa và giải mã bằng thuật toán RSA
